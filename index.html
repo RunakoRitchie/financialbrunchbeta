@@ -89,7 +89,8 @@
             <div class="carousel-container">
                 <div class="carousel-wrapper">
                     <div class="carousel-track" id="carousel-track">
-                        <!-- Slide 1 -->
+                        <!-- CMS Articles will be loaded here dynamically -->
+                        <!-- Fallback content for when CMS is loading -->
                         <div class="carousel-slide active">
                             <div class="slide-background">
                                 <div class="slide-image"></div>
@@ -97,63 +98,12 @@
                             </div>
                             <div class="slide-content">
                                 <div class="slide-meta">
-                                    <span class="slide-category">Banking</span>
-                                    <span class="slide-date">July 2024</span>
+                                    <span class="slide-category">Loading...</span>
+                                    <span class="slide-date">...</span>
                                 </div>
-                                <h3 class="slide-title">Indonesian Banking Sector Outlook H2 2024</h3>
-                                <p class="slide-excerpt">Comprehensive analysis of Indonesia's banking sector performance and growth prospects for the second half of 2024.</p>
-                                <a href="#" class="slide-cta">Read Full Report</a>
-                            </div>
-                        </div>
-
-                        <!-- Slide 2 -->
-                        <div class="carousel-slide">
-                            <div class="slide-background">
-                                <div class="slide-image"></div>
-                                <div class="slide-overlay"></div>
-                            </div>
-                            <div class="slide-content">
-                                <div class="slide-meta">
-                                    <span class="slide-category">Retirement</span>
-                                    <span class="slide-date">June 2024</span>
-                                </div>
-                                <h3 class="slide-title">Fixed Income Strategy for Retirement</h3>
-                                <p class="slide-excerpt">Strategic approach to building a robust fixed income portfolio for retirement planning in the current interest rate environment.</p>
-                                <a href="#" class="slide-cta">Read Full Report</a>
-                            </div>
-                        </div>
-
-                        <!-- Slide 3 -->
-                        <div class="carousel-slide">
-                            <div class="slide-background">
-                                <div class="slide-image"></div>
-                                <div class="slide-overlay"></div>
-                            </div>
-                            <div class="slide-content">
-                                <div class="slide-meta">
-                                    <span class="slide-category">Equity</span>
-                                    <span class="slide-date">May 2024</span>
-                                </div>
-                                <h3 class="slide-title">Top Performing Equity Funds</h3>
-                                <p class="slide-excerpt">Analysis of the best performing equity funds in Southeast Asia with detailed performance metrics and investment strategies.</p>
-                                <a href="#" class="slide-cta">Read Full Report</a>
-                            </div>
-                        </div>
-
-                        <!-- Slide 4 -->
-                        <div class="carousel-slide">
-                            <div class="slide-background">
-                                <div class="slide-image"></div>
-                                <div class="slide-overlay"></div>
-                            </div>
-                            <div class="slide-content">
-                                <div class="slide-meta">
-                                    <span class="slide-category">Market Update</span>
-                                    <span class="slide-date">August 2024</span>
-                                </div>
-                                <h3 class="slide-title">Southeast Asian Markets Weekly</h3>
-                                <p class="slide-excerpt">Weekly market overview covering key developments, policy changes, and investment opportunities across the region.</p>
-                                <a href="#" class="slide-cta">Read Full Report</a>
+                                <h3 class="slide-title">Loading Latest Research...</h3>
+                                <p class="slide-excerpt">Please wait while we load the latest research articles from our content management system.</p>
+                                <a href="#" class="slide-cta">Loading...</a>
                             </div>
                         </div>
                     </div>
@@ -173,10 +123,7 @@
 
                 <!-- Carousel Indicators -->
                 <div class="carousel-indicators" id="carousel-indicators">
-                    <button class="indicator active" data-slide="0" aria-label="Go to slide 1"></button>
-                    <button class="indicator" data-slide="1" aria-label="Go to slide 2"></button>
-                    <button class="indicator" data-slide="2" aria-label="Go to slide 3"></button>
-                    <button class="indicator" data-slide="3" aria-label="Go to slide 4"></button>
+                    <!-- Indicators will be generated dynamically -->
                 </div>
             </div>
         </div>
@@ -299,5 +246,279 @@
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
+    
+    <!-- CMS Integration Script -->
+    <script>
+        // CMS Content Loader for Financial Brunch
+        class CMSLoader {
+            constructor() {
+                this.currentLanguage = 'en';
+                this.articles = [];
+                this.currentSlide = 0;
+                this.init();
+            }
+
+            async init() {
+                await this.loadCMSArticles();
+                this.setupLanguageToggle();
+                this.setupCarousel();
+            }
+
+            async loadCMSArticles() {
+                try {
+                    // Try to fetch articles from GitHub API (public repo)
+                    const repoUrl = 'https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO_NAME/contents/content/research';
+                    const response = await fetch(repoUrl);
+                    
+                    if (response.ok) {
+                        const files = await response.json();
+                        const articles = await this.processMarkdownFiles(files);
+                        if (articles.length > 0) {
+                            this.articles = articles;
+                            this.renderArticles();
+                            return;
+                        }
+                    }
+                } catch (error) {
+                    console.log('Could not load from GitHub API, using fallback content');
+                }
+
+                // Fallback: Use sample content if CMS articles not available
+                this.loadFallbackContent();
+            }
+
+            async processMarkdownFiles(files) {
+                const articles = [];
+                
+                for (const file of files.slice(0, 4)) { // Limit to 4 articles for carousel
+                    if (file.name.endsWith('.md')) {
+                        try {
+                            const contentResponse = await fetch(file.download_url);
+                            const content = await contentResponse.text();
+                            const article = this.parseMarkdown(content, file.name);
+                            if (article) articles.push(article);
+                        } catch (error) {
+                            console.log(`Error loading ${file.name}:`, error);
+                        }
+                    }
+                }
+                
+                return articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            parseMarkdown(content, filename) {
+                // Parse front matter
+                const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+                if (!frontMatterMatch) return null;
+
+                const frontMatter = {};
+                const frontMatterLines = frontMatterMatch[1].split('\n');
+                
+                frontMatterLines.forEach(line => {
+                    const [key, ...valueParts] = line.split(':');
+                    if (key && valueParts.length > 0) {
+                        const value = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+                        frontMatter[key.trim()] = value;
+                    }
+                });
+
+                // Create slug from filename
+                const slug = filename.replace('.md', '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
+
+                return {
+                    title: frontMatter.title || 'Untitled',
+                    title_id: frontMatter.title_id || frontMatter.title || 'Tanpa Judul',
+                    excerpt: frontMatter.excerpt || 'No excerpt available',
+                    excerpt_id: frontMatter.excerpt_id || frontMatter.excerpt || 'Tidak ada ringkasan',
+                    category: frontMatter.category || 'Research',
+                    date: frontMatter.date || new Date().toISOString(),
+                    slug: slug,
+                    featured: frontMatter.featured === 'true' || frontMatter.featured === true
+                };
+            }
+
+            loadFallbackContent() {
+                this.articles = [
+                    {
+                        title: "Indonesian Banking Sector Outlook H2 2024",
+                        title_id: "Prospek Sektor Perbankan Indonesia H2 2024",
+                        excerpt: "Comprehensive analysis of Indonesia's banking sector performance and growth prospects for the second half of 2024.",
+                        excerpt_id: "Analisis komprehensif kinerja sektor perbankan Indonesia dan prospek pertumbuhan untuk semester kedua 2024.",
+                        category: "Banking",
+                        date: "2024-07-28",
+                        slug: "indonesian-banking-outlook-h2-2024"
+                    },
+                    {
+                        title: "Fixed Income Strategy for Retirement",
+                        title_id: "Strategi Pendapatan Tetap untuk Pensiun",
+                        excerpt: "Strategic approach to building a robust fixed income portfolio for retirement planning in the current interest rate environment.",
+                        excerpt_id: "Pendekatan strategis untuk membangun portofolio pendapatan tetap yang kuat untuk perencanaan pensiun di lingkungan suku bunga saat ini.",
+                        category: "Retirement",
+                        date: "2024-06-15",
+                        slug: "fixed-income-retirement-strategy"
+                    },
+                    {
+                        title: "Top Performing Equity Funds",
+                        title_id: "Reksa Dana Saham Berkinerja Terbaik",
+                        excerpt: "Analysis of the best performing equity funds in Southeast Asia with detailed performance metrics and investment strategies.",
+                        excerpt_id: "Analisis reksa dana saham berkinerja terbaik di Asia Tenggara dengan metrik kinerja terperinci dan strategi investasi.",
+                        category: "Equity",
+                        date: "2024-05-20",
+                        slug: "top-performing-equity-funds"
+                    },
+                    {
+                        title: "Southeast Asian Markets Weekly",
+                        title_id: "Pasar Asia Tenggara Mingguan",
+                        excerpt: "Weekly market overview covering key developments, policy changes, and investment opportunities across the region.",
+                        excerpt_id: "Ikhtisar pasar mingguan yang mencakup perkembangan utama, perubahan kebijakan, dan peluang investasi di seluruh wilayah.",
+                        category: "Market Update",
+                        date: "2024-08-01",
+                        slug: "southeast-asian-markets-weekly"
+                    }
+                ];
+                this.renderArticles();
+            }
+
+            renderArticles() {
+                const carouselTrack = document.getElementById('carousel-track');
+                const indicators = document.getElementById('carousel-indicators');
+                
+                if (!carouselTrack || !indicators) return;
+
+                // Clear existing content
+                carouselTrack.innerHTML = '';
+                indicators.innerHTML = '';
+
+                // Render articles
+                this.articles.forEach((article, index) => {
+                    const slide = this.createSlide(article, index);
+                    carouselTrack.appendChild(slide);
+
+                    const indicator = this.createIndicator(index);
+                    indicators.appendChild(indicator);
+                });
+
+                // Set first slide as active
+                if (this.articles.length > 0) {
+                    carouselTrack.firstElementChild.classList.add('active');
+                    indicators.firstElementChild.classList.add('active');
+                }
+            }
+
+            createSlide(article, index) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                if (index === 0) slide.classList.add('active');
+
+                const title = this.currentLanguage === 'id' ? article.title_id : article.title;
+                const excerpt = this.currentLanguage === 'id' ? article.excerpt_id : article.excerpt;
+                const date = new Date(article.date).toLocaleDateString(
+                    this.currentLanguage === 'id' ? 'id-ID' : 'en-US',
+                    { year: 'numeric', month: 'long', day: 'numeric' }
+                );
+
+                slide.innerHTML = `
+                    <div class="slide-background">
+                        <div class="slide-image"></div>
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide-content">
+                        <div class="slide-meta">
+                            <span class="slide-category">${article.category}</span>
+                            <span class="slide-date">${date}</span>
+                        </div>
+                        <h3 class="slide-title">${title}</h3>
+                        <p class="slide-excerpt">${excerpt}</p>
+                        <a href="/research/${article.slug}" class="slide-cta">
+                            ${this.currentLanguage === 'id' ? 'Baca Laporan Lengkap' : 'Read Full Report'}
+                        </a>
+                    </div>
+                `;
+
+                return slide;
+            }
+
+            createIndicator(index) {
+                const indicator = document.createElement('button');
+                indicator.className = 'indicator';
+                indicator.setAttribute('data-slide', index);
+                indicator.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                if (index === 0) indicator.classList.add('active');
+
+                indicator.addEventListener('click', () => {
+                    this.goToSlide(index);
+                });
+
+                return indicator;
+            }
+
+            setupLanguageToggle() {
+                const langButtons = document.querySelectorAll('.lang-btn');
+                langButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const lang = btn.getAttribute('data-lang');
+                        if (lang !== this.currentLanguage) {
+                            this.currentLanguage = lang;
+                            
+                            // Update active button
+                            langButtons.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            
+                            // Re-render articles with new language
+                            this.renderArticles();
+                        }
+                    });
+                });
+            }
+
+            setupCarousel() {
+                const prevBtn = document.getElementById('carousel-prev');
+                const nextBtn = document.getElementById('carousel-next');
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => this.prevSlide());
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => this.nextSlide());
+                }
+
+                // Auto-play carousel
+                setInterval(() => {
+                    this.nextSlide();
+                }, 10000); // Change slide every 10 seconds
+            }
+
+            prevSlide() {
+                this.currentSlide = this.currentSlide === 0 ? this.articles.length - 1 : this.currentSlide - 1;
+                this.goToSlide(this.currentSlide);
+            }
+
+            nextSlide() {
+                this.currentSlide = this.currentSlide === this.articles.length - 1 ? 0 : this.currentSlide + 1;
+                this.goToSlide(this.currentSlide);
+            }
+
+            goToSlide(index) {
+                const slides = document.querySelectorAll('.carousel-slide');
+                const indicators = document.querySelectorAll('.indicator');
+
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === index);
+                });
+
+                this.currentSlide = index;
+            }
+        }
+
+        // Initialize CMS Loader when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new CMSLoader();
+        });
+    </script>
 </body>
 </html>
