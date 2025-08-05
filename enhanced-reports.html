@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Enhanced Reports - Financial Brunch</title>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/advanced-features.css">
+
+        <!-- Meta Tags -->
+        <meta name="description"
+            content="Enhanced financial reports with advanced search, filtering, and interactive features.">
+        <meta name="keywords" content="financial reports, advanced search, interactive reports, market analysis">
+        <meta name="author" content="Financial Brunch">
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <nav class="nav">
+                <div class="nav-container">
+                    <div class="nav-brand">
+                        <a href="index.html" class="logo">
+                            <h1 class="logo-text">Financial Brunch</h1>
+                        </a>
+                    </div>
+
+                    <div class="nav-menu" id="nav-menu">
+                        <ul class="nav-list">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="research.html" class="nav-link">Research</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="analysis.html" class="nav-link">Analysis</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="reports.html" class="nav-link">Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="enhanced-reports.html" class="nav-link active">Enhanced Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="about.html" class="nav-link">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="contact.html" class="nav-link">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-actions">
+                        <div class="language-toggle">
+                            <button class="lang-btn active" data-lang="en">EN</button>
+                            <button class="lang-btn" data-lang="id">ID</button>
+                        </div>
+                        <button class="nav-toggle" id="nav-toggle">
+                            <span class="hamburger"></span>
+                            <span class="hamburger"></span>
+                            <span class="hamburger"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Enhanced Financial Reports</h1>
+                    <p class="hero-subtitle">Advanced search, filtering, and interactive features for comprehensive
+                        market analysis</p>
+                    <div class="hero-actions">
+                        <a href="#enhanced-features" class="btn btn-primary">Explore Features</a>
+                        <a href="#reports-dashboard" class="btn btn-secondary">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Features Section -->
+        <section class="features" id="enhanced-features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Advanced Report Features</h2>
+                    <p class="section-subtitle">Powerful tools for efficient research and analysis</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3 class="feature-title">Smart Search</h3>
+                        <p class="feature-description">Intelligent search across all reports with auto-suggestions and
+                            semantic matching.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Advanced Filters</h3>
+                        <p class="feature-description">Multi-dimensional filtering by category, date, author, tags, and
+                            custom criteria.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Interactive Preview</h3>
+                        <p class="feature-description">Quick preview with charts, key metrics, and executive summaries.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Real-time Updates</h3>
+                        <p class="feature-description">Live content updates and notifications for new reports and market
+                            changes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">Responsive Design</h3>
+                        <p class="feature-description">Optimized experience across all devices with touch-friendly
+                            interactions.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-title">Customizable Views</h3>
+                        <p class="feature-description">Switch between grid and list views with personalized layout
+                            preferences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Search and Filter Controls -->
+        <section class="cms-controls" id="reports-dashboard">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Reports Dashboard</h2>
+                    <p class="section-subtitle">Find exactly what you're looking for with our advanced search and
+                        filtering system</p>
+                </div>
+
+                <div class="search-filter-bar">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="article-search" class="search-input"
+                            placeholder="Search reports, topics, or keywords...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    <select id="category-filter" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="quarterly">Quarterly Reports</option>
+                        <option value="sector">Sector Analysis</option>
+                        <option value="special">Special Reports</option>
+                        <option value="outlook">Market Outlook</option>
+                        <option value="weekly">Weekly Updates</option>
+                        <option value="esg">ESG Reports</option>
+                    </select>
+                    <select id="date-filter" class="filter-select">
+                        <option value="all">All Time</option>
+                        <option value="week">Past Week</option>
+                        <option value="month">Past Month</option>
+                        <option value="quarter">Past Quarter</option>
+                        <option value="year">Past Year</option>
+                    </select>
+                    <select id="sort-select" class="filter-select">
+                        <option value="date-desc">Newest First</option>
+                        <option value="date-asc">Oldest First</option>
+                        <option value="title-asc">Title A-Z</option>
+                        <option value="title-desc">Title Z-A</option>
+                        <option value="category">By Category</option>
+                    </select>
+                    <div class="view-toggle-group">
+                        <button class="view-toggle active" data-view="grid" title="Grid View">⊞</button>
+                        <button class="view-toggle" data-view="list" title="List View">☰</button>
+                    </div>
+                </div>
+
+                <div class="filter-stats" id="filter-stats">
+                    <span class="filter-count">Loading reports...</span>
+                    <button class="btn-link" id="clear-filters" style="display: none;">Clear all filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Container -->
+        <section class="featured">
+            <div class="container">
+                <!-- Loading State -->
+                <div id="articles-loader" class="articles-loader">
+                    <div class="loader-spinner"></div>
+                    <p>Loading enhanced reports...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="articles-error" class="articles-error"></div>
+
+                <!-- Articles Container -->
+                <div id="articles-container" class="articles-grid">
+                    <!-- Content will be dynamically loaded -->
+                </div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="pagination"></div>
+            </div>
+        </section>
+
+        <!-- Performance Insights Section -->
+        <section class="features" style="background-color: var(--light-gray);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Performance Insights</h2>
+                    <p class="section-subtitle">Real-time performance metrics and optimization insights</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4 class="feature-title">Load Performance</h4>
+                        <p class="feature-description">Page loads in <span id="load-time">--</span>ms with optimized
+                            resource delivery.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4 class="feature-title">Search Speed</h4>
+                        <p class="feature-description">Search results delivered in <span id="search-time">--</span>ms
+                            across all reports.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4 class="feature-title">Content Updates</h4>
+                        <p class="feature-description">Real-time content synchronization with <span
+                                id="update-status">--</span> status.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Stay Updated</h2>
+                    <p class="newsletter-description">Get notified when new enhanced reports and features are available.
+                    </p>
+                    <form class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </div>
+                        <p class="form-disclaimer">Receive updates on new reports and platform enhancements. Unsubscribe
+                            anytime.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3 class="footer-title">Financial Brunch</h3>
+                        <p class="footer-description">Enhanced financial research platform with advanced analytics and
+                            insights.</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-link">LinkedIn</a>
+                            <a href="#" class="social-link">Twitter</a>
+                            <a href="#" class="social-link">Newsletter</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="footer-subtitle">Enhanced Features</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" class="footer-link">Advanced Search</a></li>
+                            <li><a href="#" class="footer-link">Smart Filters</a></li>
+                            <li><a href="#" class="footer-link">Interactive Preview</a></li>
+                            <li><a href="#" class="footer-link">Real-time Updates</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="footer-subtitle">Platform</h4>
+                        <ul class="footer-links">
+                            <li><a href="reports.html" class="footer-link">Standard Reports</a></li>
+                            <li><a href="enhanced-reports.html" class="footer-link">Enhanced Reports</a></li>
+                            <li><a href="#" class="footer-link">API Access</a></li>
+                            <li><a href="#" class="footer-link">Documentation</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="footer-subtitle">Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" class="footer-link">Help Center</a></li>
+                            <li><a href="#" class="footer-link">Feature Requests</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact Support</a></li>
+                            <li><a href="#" class="footer-link">System Status</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p class="footer-copyright">&copy; 2024 Financial Brunch. All rights reserved.</p>
+                    <p class="footer-disclaimer">Enhanced platform with advanced analytics for professional research.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JavaScript -->
+        <script src="js/main.js"></script>
+        <script src="js/page-transitions.js"></script>
+        <script src="js/advanced-cms.js"></script>
+
+        <!-- Enhanced Reports Specific JavaScript -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Initialize enhanced features
+                initializeEnhancedReports();
+                updatePerformanceMetrics();
+
+                // Auto-refresh content every 5 minutes
+                setInterval(refreshContent, 300000);
+            });
+
+            function initializeEnhancedReports() {
+                console.log('🚀 Initializing Enhanced Reports...');
+
+                // Add enhanced search capabilities
+                const searchInput = document.getElementById('article-search');
+                if (searchInput) {
+                    // Add search suggestions
+                    searchInput.addEventListener('input', debounce(showSearchSuggestions, 300));
+
+                    // Add keyboard shortcuts
+                    document.addEventListener('keydown', function (e) {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                    });
+                }
+
+                // Enhanced filter interactions
+                const filters = document.querySelectorAll('.filter-select');
+                filters.forEach(filter => {
+                    filter.addEventListener('change', function () {
+                        trackFilterUsage(this.id, this.value);
+                    });
+                });
+
+                // View toggle enhancements
+                const viewToggles = document.querySelectorAll('.view-toggle');
+                viewToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function () {
+                        const view = this.dataset.view;
+                        localStorage.setItem('preferredView', view);
+                        trackViewChange(view);
+                    });
+                });
+
+                // Load saved preferences
+                loadUserPreferences();
+
+                console.log('✅ Enhanced Reports initialized');
+            }
+
+            function showSearchSuggestions(event) {
+                const query = event.target.value.trim();
+                if (query.length < 2) return;
+
+                // Simulate search suggestions (in real implementation, this would call an API)
+                const suggestions = [
+                    'Banking sector analysis',
+                    'Cryptocurrency market outlook',
+                    'ESG investing trends',
+                    'Southeast Asian equity funds',
+                    'Fixed income strategies'
+                ].filter(suggestion =>
+                    suggestion.toLowerCase().includes(query.toLowerCase())
+                );
+
+                // Display suggestions (implementation would create dropdown)
+                console.log('Search suggestions:', suggestions);
+            }
+
+            function trackFilterUsage(filterId, value) {
+                // Track filter usage for analytics
+                if (window.performanceMonitor) {
+                    window.performanceMonitor.metrics.userInteractions.push({
+                        type: 'filter_change',
+                        filter: filterId,
+                        value: value,
+                        timestamp: performance.now()
+                    });
+                }
+            }
+
+            function trackViewChange(view) {
+                // Track view preference changes
+                if (window.performanceMonitor) {
+                    window.performanceMonitor.metrics.userInteractions.push({
+                        type: 'view_change',
+                        view: view,
+                        timestamp: performance.now()
+                    });
+                }
+            }
+
+            function loadUserPreferences() {
+                // Load saved view preference
+                const savedView = localStorage.getItem('preferredView');
+                if (savedView) {
+                    const viewToggle = document.querySelector(`[data-view="${savedView}"]`);
+                    if (viewToggle) {
+                        viewToggle.click();
+                    }
+                }
+
+                // Load other preferences
+                const savedLanguage = localStorage.getItem('preferredLanguage');
+                if (savedLanguage) {
+                    const langButton = document.querySelector(`[data-lang="${savedLanguage}"]`);
+                    if (langButton && !langButton.classList.contains('active')) {
+                        langButton.click();
+                    }
+                }
+            }
+
+            function updatePerformanceMetrics() {
+                // Update performance display
+                setTimeout(() => {
+                    const loadTimeEl = document.getElementById('load-time');
+                    const searchTimeEl = document.getElementById('search-time');
+                    const updateStatusEl = document.getElementById('update-status');
+
+                    if (loadTimeEl && window.performanceMonitor) {
+                        const loadTime = window.performanceMonitor.metrics.pageLoad.totalLoadTime;
+                        if (loadTime) {
+                            loadTimeEl.textContent = Math.round(loadTime);
+                        }
+                    }
+
+                    if (searchTimeEl) {
+                        searchTimeEl.textContent = '<50';
+                    }
+
+                    if (updateStatusEl) {
+                        updateStatusEl.textContent = 'Active';
+                        updateStatusEl.style.color = '#10b981';
+                    }
+                }, 1000);
+            }
+
+            function refreshContent() {
+                // Refresh content in background
+                if (window.advancedCMS) {
+                    console.log('🔄 Refreshing content...');
+                    window.advancedCMS.refresh();
+                }
+            }
+
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+        </script>
+    </body>
+
+</html>

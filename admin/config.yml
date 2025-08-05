@@ -12,16 +12,16 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Title (English)", name: "title", widget: "string"}
-      - {label: "Title (Indonesian)", name: "title_id", widget: "string"}
+      - {label: "Title (English)", name: "title", widget: "string", hint: "Main title in English. If left empty, will auto-translate from Indonesian."}
+      - {label: "Title (Indonesian)", name: "title_id", widget: "string", hint: "Title in Indonesian. If left empty, will auto-translate from English.", required: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Category", name: "category", widget: "select", options: ["Banking", "Bonds", "Equity", "Economics", "Markets"]}
-      - {label: "Excerpt (English)", name: "excerpt", widget: "text"}
-      - {label: "Excerpt (Indonesian)", name: "excerpt_id", widget: "text"}
-      - {label: "Featured Article", name: "featured", widget: "boolean", default: false}
+      - {label: "Category", name: "category", widget: "select", options: ["Banking", "Bonds", "Equity", "Economics", "Markets"], hint: "Category will be automatically translated"}
+      - {label: "Excerpt (English)", name: "excerpt", widget: "text", hint: "Brief description in English (2-3 sentences). Auto-translation available."}
+      - {label: "Excerpt (Indonesian)", name: "excerpt_id", widget: "text", hint: "Brief description in Indonesian. If left empty, will auto-translate from English.", required: false}
+      - {label: "Featured Article", name: "featured", widget: "boolean", default: false, hint: "Featured articles appear first in the carousel"}
       - {label: "Published", name: "published", widget: "boolean", default: true}
-      - {label: "Body (English)", name: "body", widget: "markdown"}
-      - {label: "Body (Indonesian)", name: "body_id", widget: "markdown"}
+      - {label: "Body (English)", name: "body", widget: "markdown", hint: "Full article content in English"}
+      - {label: "Body (Indonesian)", name: "body_id", widget: "markdown", hint: "Full article content in Indonesian. Auto-translation coming soon.", required: false}
 
   - name: "pages"
     label: "Pages"
